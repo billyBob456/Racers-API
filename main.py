@@ -20,7 +20,9 @@ allCars = [
 	{"name":"Tesla Model X", "top speed":250},
 	{"name":"Chevrolet Corvette", "top speed":312},
 	{"name":"Porsche 911", "top speed":330},
-	{"name":"Subaru Forester", "top speed":188}]
+	{"name":"Subaru Forester", "top speed":188},
+	{"name":"Ford Mustand Mach-E", "top speed":258},
+	{"name":"Mazda CX-9", "top speed":217}]
 for car in allCars:
 	car["price"]=car["top speed"]*1000
 startCar = allCars[0]
