@@ -24,7 +24,7 @@ allCars = [
 	{"name":"Ford Mustand Mach-E", "top speed":258},
 	{"name":"Mazda CX-9", "top speed":217}]
 for car in allCars:
-	car["price"]=car["top speed"]*1000
+	car["price"] = car["top speed"] * 1000
 startCar = allCars[0]
 
 def encode(msg):
@@ -73,10 +73,10 @@ def availableRaces(key):
 	topSpeed = car['top speed']
 	races = []
 	for i in range(20):
-		x = i-10
+		x = i - 10
 		bonus = topSpeed/1000
 		bonus = topSpeed+1
-		races.append({"average top speed":topSpeed+x, "payout": ((i+1)*1000)+random.choice(list(range(1,1000)))*float(bonus)})
+		races.append({"average top speed":topSpeed + x, "payout": ((i+1)*1000) + random.choice(list(range(1,1000))) * float(bonus)})
 		races[-1]["key"]=encode(json.dumps(races[-1]))
 	random.shuffle(races)
 	races = json.dumps(races)
@@ -98,19 +98,19 @@ def race(key, raceKey):
 	else: positive = False
 	if positive == True:
 		if diff == 0: chances = 50
-		elif diff <=10: chances = 70
-		elif diff <=20: chances = 90
-		elif diff >=21: chances = 100
+		elif diff <= 10: chances = 70
+		elif diff <= 20: chances = 90
+		elif diff >= 21: chances = 100
 	else:
-		if diff >=-10: chances = 40
-		elif diff >=-20: chances = 20
-		elif diff <=-21: chances = 0
-	if random.choice(range(1,101))<=chances: 
-		key["coins"]=coins+payout
+		if diff >= -10: chances = 40
+		elif diff >= -20: chances = 20
+		elif diff <= -21: chances = 0
+	if random.choice(range(1,101)) <= chances: 
+		key["coins"]=coins + payout
 		return {"message":"Well done! You won your race as well as $" + str(payout) + "!", "key":str(encode(json.dumps(key)))}
 	else:
-		key["coins"]=coins-payout
-		if key["coins"] <=0:
+		key["coins"]=coins - payout
+		if key["coins"] < 0:
 			return {"message":'Oh no! You lost the race! You have lost $' + str(payout) + '!', "key":str(encode(json.dumps(key)))}
 		else:
 			return {"message":"Oh no! You're bankrupt! Use your old key to try again from where you left off, or restart!"}
@@ -134,11 +134,11 @@ def buyCar(key, carKey):
 	carKey = decode(carKey)
 	carKey = ast.literal_eval(carKey)
 	price = carKey["price"]
-	if float(coins)<float(price):
+	if float(coins) < float(price):
 		return {"message":"Oh no! You don't have enough credits to buy this car! Win more races, then try again!"}
 	else:
 		key["car"] = carKey
 		car = key["car"]
-		return {"message":"Yay! You've bought the "+car["name"]+"!"}
+		return {"message":"Yay! You've bought the " + car["name"] + "!"}
 
 app.run(host="0.0.0.0", port=8080)
