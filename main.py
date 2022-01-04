@@ -126,7 +126,7 @@ def currentCar(key):
 def availableCars():
 	return {'message':'Copy the key to the car that you want to buy! Make sure you have enough credit though!', 'cars':json.dumps(allCarsKeys)}
 
-@app.route('/buy-car/<key>/<carKey>')
+@app.route('/buy-car/<key>/<carKey>/')
 def buyCar(key, carKey):
 	key = decode(key)
 	key = ast.literal_eval(key)
