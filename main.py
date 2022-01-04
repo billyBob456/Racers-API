@@ -1,11 +1,11 @@
-from flask import Flask
+from flask import Flask, render_template, send_from_directory
 from flask_cors import CORS
 import base64
 import ast
 import json
 import random
 
-app = Flask(__name__)
+app = Flask(__name__,static_url_path='')
 CORS(app)
 
 startCoins = 100000
@@ -43,9 +43,13 @@ allCarsKeys = allCars.copy()
 for item in allCarsKeys:
 	item["key"] = encode(str(item))
 
+@app.route('/scripts/<path:path>')
+def send_scripts(path):
+	return send_from_directory('templates/', path)
+
 @app.route("/")
 def home():
-  return ""
+  return render_template('home.html')
 
 @app.route("/status/")
 def status():

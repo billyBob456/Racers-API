@@ -1,0 +1,14 @@
+* {
+	font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
+body {
+	color:white;
+	background-color: black}
+
+.top-bar {
+	background-color:orange;
+	text-align:center;
+	font-size: 45px;
+	color:black;
+	height: 50px;
+}
