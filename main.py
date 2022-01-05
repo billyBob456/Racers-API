@@ -78,10 +78,10 @@ def availableRaces(key):
 	races = []
 	for i in range(20):
 		x = i - 10
-		bonus = topSpeed/1000
-		bonus = topSpeed+1
-		races.append({"average top speed":topSpeed + x, "payout": ((i+1)*1000) + random.choice(list(range(1,1000))) * float(bonus)})
-		races[-1]["key"]=encode(json.dumps(races[-1]))
+		bonus = topSpeed / 100000
+		bonus = bonus + 1
+		races.append({"average top speed":topSpeed + x, "payout": ((i+1) * 1000) + random.choice(list(range(1,1000))) * bonus})
+		races[-1]["key"] = encode(json.dumps(races[-1]))
 	random.shuffle(races)
 	races = json.dumps(races)
 	return races
@@ -109,11 +109,12 @@ def race(key, raceKey):
 		if diff >= -10: chances = 40
 		elif diff >= -20: chances = 20
 		elif diff <= -21: chances = 0
+
 	if random.choice(range(1,101)) <= chances: 
-		key["coins"]=coins + payout
+		key["coins"] = int(coins) + int(payout)
 		return {"message":"Well done! You won your race as well as $" + str(payout) + "!", "key":str(encode(json.dumps(key)))}
 	else:
-		key["coins"]=coins - payout
+		key["coins"] = int(coins) - int(payout)
 		if key["coins"] < 0:
 			return {"message":'Oh no! You lost the race! You have lost $' + str(payout) + '!', "key":str(encode(json.dumps(key)))}
 		else:
