@@ -55,21 +55,21 @@ def home():
 def status():
 	return "Racers API is ready to play!"
 
-@app.route("/start/<username>")
+@app.route("/start/<username>/")
 def start(username):
 	key = {"username":username, "car":startCar, "coins":startCoins}
 	key = encode(str(key))
 	return {"message":"Welcome to Racers.API! Have fun!",
 	"key": key}
 
-@app.route("/account/<key>")
+@app.route("/account/<key>/")
 def account(key):
 	try:
 		return decode(key)
 	except:
 		return 'Oops! An error occurred! Make sure you have the right key!'
 
-@app.route("/available-races/<key>")
+@app.route("/available-races/<key>/")
 def availableRaces(key):
 	key = decode(key)
 	key = ast.literal_eval(key)
