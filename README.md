@@ -265,4 +265,35 @@ key = raceResults["key"]
 print(raceResults["message"])
 ```
 ## 
-More documentation coming out soon including how to buy new cars and mod the game to add your own cars!
+Cheat code to get custom amounts of money, and make your own car:
+``` python
+...
+import base64
+...
+#Cheat code
+def encode(msg):
+	result = msg.encode("ascii")
+	result = base64.b64encode(result)
+	result = result.decode("ascii")
+	return result
+
+def decode(msg):
+	result = msg.encode("ascii")
+	result = base64.b64decode(result)
+	result = result.decode("ascii")
+	return result
+
+decodedKey = decode(key)
+decodedKey = ast.literal_eval(decodedKey)
+#Setting money
+decodedKey["coins"] = 999999 #set the amount here
+#Making your own car
+decodedKey["car"] = {"name":"YOUR CAR NAME", "top speed":300, "price":300000}
+carKey = encode(json.dumps(decodedKey["car"]))
+decodedKey["car"]["key"] = carKey
+print(decodedKey)
+#Encode key and reset account(necessary)
+key = encode(json.dumps(decodedKey))
+account = ast.literal_eval(requests.get("https://racersapi.billybob456.repl.co/account/" + key).content.decode("utf-8"))
+
+```
