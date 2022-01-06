@@ -146,8 +146,11 @@ raceURL = "https://racersapi.billybob456.repl.co/race/" + key + "/" + raceKey
 raceResults = requests.get(raceURL).content.decode('utf-8')
 raceKey = ""
 raceResults = ast.literal_eval(raceResults)
-key = raceResults["key"] #new key
 print(raceResults["message"])
+try:
+	key = raceResults["key"]
+except:
+	pass
 ```
 ## 
 Full script:
@@ -203,8 +206,12 @@ raceURL = "https://racersapi.billybob456.repl.co/race/" + key + "/" + raceKey
 raceResults = requests.get(raceURL).content.decode('utf-8')
 raceKey = ""
 raceResults = ast.literal_eval(raceResults)
-key = raceResults["key"]
 print(raceResults["message"])
+try:
+	key = raceResults["key"]
+except:
+	pass
+
 ```
 ## 
 Well done! You've successfully gone through the basics of Racers API and completed your first race! Below are your next steps.

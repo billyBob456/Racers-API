@@ -115,7 +115,6 @@ def race(key, raceKey):
 		return {"message":"Well done! You won your race as well as $" + str(payout) + "!", "key":str(encode(json.dumps(key)))}
 	else:
 		key["coins"] = int(coins) - int(payout)
-		print(key["coins"])
 		if key["coins"] > 0:
 			return {"message":'Oh no! You lost the race! You have lost $' + str(payout) + '!', "key":str(encode(json.dumps(key)))}
 		else:
